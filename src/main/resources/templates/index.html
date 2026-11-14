@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Locadora de Veículos</title>
+    <link rel="stylesheet" href="/css/estilo.css">
+</head>
+<body>
+    <div class="menu">
+        <a href="/">Início</a>
+        <a href="/marcas">Marcas</a>
+        <a href="/carros">Carros</a>
+        <a href="/clientes">Clientes</a>
+        <a href="/locacoes">Locações</a>
+        <a href="/h2-console" target="_blank">Banco H2</a>
+    </div>
+
+    <div class="conteudo">
+        <h1>Locadora de Veículos</h1>
+        <p>Resumo automático do sistema:</p>
+
+        <div class="caixas">
+            <div class="caixa">
+                <p>Marcas</p>
+                <h3 th:text="${totalMarcas}">0</h3>
+            </div>
+            <div class="caixa">
+                <p>Carros Disponíveis</p>
+                <h3 th:text="${carrosDisponiveis}">0</h3>
+            </div>
+            <div class="caixa">
+                <p>Carros Alugados</p>
+                <h3 th:text="${carrosAlugados}">0</h3>
+            </div>
+            <div class="caixa">
+                <p>Clientes</p>
+                <h3 th:text="${totalClientes}">0</h3>
+            </div>
+            <div class="caixa">
+                <p>Total em Locações</p>
+                <h3 th:text="'R$ ' + ${receitaTotal}">R$ 0.0</h3>
+            </div>
+        </div>
+
+        <h2>Atalhos</h2>
+        <a href="/locacoes/novo">Nova Locação</a>
+        <a href="/carros/novo">Novo Carro</a>
+        <a href="/clientes/novo">Novo Cliente</a>
+        <a href="/marcas/novo">Nova Marca</a>
+    </div>
+</body>
+</html>

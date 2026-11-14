@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Vendas Realizadas</title>
+    <link rel="stylesheet" href="/css/estilo.css">
+</head>
+<body>
+    <h1>Vendas e Financiamentos (Cálculo Automático)</h1>
+    <a href="/">Início</a>
+    <a href="/vendas/novo">Registrar Nova Venda</a>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Data Automática</th>
+                <th>Cliente (FK)</th>
+                <th>Carro / Marca (FK)</th>
+                <th>Preço Tabela</th>
+                <th>Regra Aplicada</th>
+                <th>Valor da Parcela</th>
+                <th>Valor Final Calculado</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="v : ${vendas}">
+                <td th:text="${v.id}"></td>
+                <td th:text="${v.dataVenda}"></td>
+                <td th:text="${v.cliente.nome}"></td>
+                <td th:text="${v.carro.modelo} + ' (' + ${v.carro.marca.nome} + ')'"></td>
+                <td th:text="'R$ ' + ${v.carro.valor}"></td>
+                <td th:text="${v.regraAplicada}"></td>
+                <td th:text="${v.parcelas} + 'x de R$ ' + ${v.valorParcelaCalculado}"></td>
+                <td><strong th:text="'R$ ' + ${v.valorFinalCalculado}"></strong></td>
+                <td>
+                    <a th:href="@{/vendas/excluir/{id}(id=${v.id})}"
+                       onclick="return confirm('Cancelar venda?')">Excluir</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

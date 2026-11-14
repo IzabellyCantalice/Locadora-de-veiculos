@@ -1,0 +1,200 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #ffffff;
+    color: #000000;
+    margin: 0;
+    padding: 0 0 40px 0;
+    text-align: center;
+}
+
+/* Esconde qualquer logo antigo caso tenha sobrado em algum HTML */
+.logo {
+    display: none !important;
+}
+
+/* Menu superior centralizado com uma única linha amarela */
+.menu, .navbar {
+    background-color: #5b21b6;
+    padding: 15px 20px;
+    border-bottom: 5px solid #facc15;
+    margin-bottom: 25px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.navbar .menu {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding: 0;
+}
+
+/* Links e botões quadrados combinando */
+a, input[type="submit"], button {
+    display: inline-block;
+    background-color: #5b21b6;
+    color: #ffffff;
+    padding: 8px 14px;
+    margin: 4px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 14px;
+    border: 2px solid #facc15;
+    cursor: pointer;
+}
+
+a:hover, input[type="submit"]:hover, button:hover {
+    background-color: #facc15;
+    color: #3b0764;
+    border: 2px solid #3b0764;
+}
+
+.menu a, .navbar a {
+    background-color: #facc15;
+    color: #3b0764;
+    border: 2px solid #000000;
+}
+
+.menu a:hover, .navbar a:hover {
+    background-color: #ffffff;
+    color: #5b21b6;
+}
+
+.conteudo, .container {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 20px;
+    text-align: center;
+}
+
+/* Título centralizado na própria linha (sem grudar no botão) */
+h1 {
+    color: #5b21b6;
+    border-bottom: 4px solid #facc15;
+    padding-bottom: 6px;
+    margin: 0 auto 15px auto;
+    display: table;
+}
+
+h2 {
+    color: #5b21b6;
+    margin: 25px 0 10px 0;
+}
+
+/* Caixas quadradas da tela inicial */
+.caixas, .cards {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+    margin: 20px auto;
+}
+
+.caixa, .card {
+    background-color: #ffffff;
+    border: 3px solid #5b21b6;
+    border-top: 10px solid #facc15;
+    padding: 15px 20px;
+    min-width: 160px;
+    text-align: center;
+}
+
+.caixa p, .card small {
+    margin: 0;
+    font-size: 14px;
+    color: #5b21b6;
+    font-weight: bold;
+    display: block;
+}
+
+.caixa h3, .card .valor {
+    margin: 8px 0 0 0;
+    font-size: 24px;
+    font-weight: bold;
+    color: #000000;
+}
+
+/* Tabelas quadradas centralizadas */
+table {
+    width: 100%;
+    max-width: 900px;
+    margin: 18px auto;
+    border-collapse: collapse;
+    background-color: #ffffff;
+    border: 3px solid #5b21b6;
+}
+
+th {
+    background-color: #5b21b6;
+    color: #facc15;
+    padding: 10px;
+    text-align: center;
+    border: 2px solid #5b21b6;
+}
+
+td {
+    padding: 8px 10px;
+    text-align: center;
+    border: 1px solid #5b21b6;
+}
+
+tr:nth-child(even) {
+    background-color: #fefce8;
+}
+
+/* Formulários quadrados centralizados */
+form, .form-card {
+    background-color: #ffffff;
+    border: 3px solid #5b21b6;
+    border-top: 10px solid #facc15;
+    padding: 20px;
+    max-width: 460px;
+    margin: 18px auto;
+    text-align: left;
+}
+
+label {
+    display: block;
+    font-weight: bold;
+    color: #5b21b6;
+    margin-top: 10px;
+    margin-bottom: 4px;
+}
+
+input[type="text"], input[type="number"], input[type="date"], select {
+    width: 100%;
+    padding: 8px;
+    border: 2px solid #5b21b6;
+    background-color: #ffffff;
+    box-sizing: border-box;
+}
+
+.aviso-calculo, .simulador-box {
+    background-color: #fef08a;
+    border: 2px solid #5b21b6;
+    color: #000000;
+    padding: 10px;
+    margin: 15px 0;
+    font-weight: bold;
+    text-align: center;
+}
+
+.badge {
+    display: inline-block;
+    padding: 4px 8px;
+    border: 2px solid #5b21b6;
+    background-color: #fef08a;
+    color: #3b0764;
+    font-weight: bold;
+    font-size: 12px;
+}
+
+.error {
+    color: red;
+    font-size: 13px;
+    font-weight: bold;
+    display: block;
+}

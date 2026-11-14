@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Nova Locação - Locadora de Veículos</title>
+    <link rel="stylesheet" href="/css/estilo.css">
+</head>
+<body>
+    <div class="menu">
+        <a href="/">Início</a>
+        <a href="/marcas">Marcas</a>
+        <a href="/carros">Carros</a>
+        <a href="/clientes">Clientes</a>
+        <a href="/locacoes">Locações</a>
+    </div>
+
+    <div class="conteudo">
+        <h1>Nova Locação</h1>
+
+        <form th:action="@{/locacoes/salvar}" th:object="${locacao}" method="post">
+            <label>Cliente:</label>
+            <select th:field="*{cliente}">
+                <option value="">Selecione um cliente</option>
+                <option th:each="cli : ${clientes}" th:value="${cli.id}" th:text="${cli.nome}"></option>
+            </select>
+            <span th:if="${#fields.hasErrors('cliente')}" th:errors="*{cliente}" class="error"></span>
+
+            <label>Carro Disponível:</label>
+            <select th:field="*{carro}" id="selectCarro" onchange="calcularValor()">
+                <option value="" data-diaria="0">Selecione um carro</option>
+                <option th:each="car : ${carros}" th:value="${car.id}"
+                        th:attr="data-diaria=${car.valor}"
+                        th:text="${car.modelo} + ' - R$ ' + ${car.valor} + '/dia'"></option>
+            </select>
+            <span th:if="${#fields.hasErrors('carro')}" th:errors="*{carro}" class="error"></span>
+
+            <label>Data de Retirada:</label>
+            <input type="date" th:field="*{dataRetirada}" id="dataRetirada" onchange="calcularValor()" />
+
+            <label>Data de Devolução:</label>
+            <input type="date" th:field="*{dataDevolucao}" id="dataDevolucao" onchange="calcularValor()" />
+
+            <div class="aviso-calculo" id="resultadoCalculo">
+                Escolha o carro e as datas para ver o valor calculado.
+            </div>
+
+            <div style="text-align: center;">
+                <input type="submit" value="Salvar Locação" />
+                <a href="/locacoes">Cancelar</a>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        function calcularValor() {
+            var select = document.getElementById('selectCarro');
+            var diaria = parseFloat(select.options[select.selectedIndex].getAttribute('data-diaria')) || 0;
+            var d1 = new Date(document.getElementById('dataRetirada').value);
+            var d2 = new Date(document.getElementById('dataDevolucao').value);
+            var aviso = document.getElementById('resultadoCalculo');
+
+            if (diaria <= 0 || isNaN(d1) || isNaN(d2)) {
+                aviso.innerText = "Escolha o carro e as datas para ver o valor calculado.";
+                return;
+            }
+            var dias = Math.round((d2 - d1) / (1000 * 60 * 60 * 24));
+            if (dias < 1) dias = 1;
+
+            var total = dias * (diaria * 1.10);
+            if (dias >= 15) {
+                total = total * 0.85;
+            } else if (dias >= 7) {
+                total = total * 0.90;
+            }
+            aviso.innerText = "Dias: " + dias + " | Total estimado (com seguro): R$ " + total.toFixed(2);
+        }
+        window.onload = calcularValor;
+    </script>
+</body>
+</html>

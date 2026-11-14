@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${marca.id} == null ? 'Nova Marca' : 'Editar Marca'"></title>
+    <link rel="stylesheet" href="/css/estilo.css">
+</head>
+<body>
+    <h1 th:text="${marca.id} == null ? 'Nova Marca' : 'Editar Marca'"></h1>
+    <form th:action="@{/marcas/salvar}" th:object="${marca}" method="post">
+        <input type="hidden" th:field="*{id}" />
+        <label for="nome">Nome:</label>
+        <input type="text" th:field="*{nome}" id="nome" placeholder="Nome da marca" />
+        <span th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}" style="color: red;"></span>
+        <br><br>
+        <input type="submit" value="Salvar" />
+        <a href="/marcas">Cancelar</a>
+    </form>
+</body>
+</html>

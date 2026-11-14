@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Registrar Venda</title>
+    <link rel="stylesheet" href="/css/estilo.css">
+</head>
+<body>
+    <h1>Registrar Venda com Cálculo Automático</h1>
+    <p><em>Dica: Escolha 1 parcela para ganhar 5% de desconto automático, ou 2+ parcelas para cálculo automático de financiamento (1,5% a.m.). A data de hoje é preenchida sozinha!</em></p>
+
+    <form th:action="@{/vendas/salvar}" th:object="${venda}" method="post">
+        <label>Cliente (Foreign Key):</label><br>
+        <select th:field="*{cliente}">
+            <option value="">Selecione um cliente</option>
+            <option th:each="cli : ${clientes}" th:value="${cli.id}" th:text="${cli.nome} + ' - CPF: ' + ${cli.cpf}"></option>
+        </select>
+        <span th:if="${#fields.hasErrors('cliente')}" th:errors="*{cliente}" class="error"></span>
+        <br><br>
+
+        <label>Carro Desejado (Foreign Key):</label><br>
+        <select th:field="*{carro}">
+            <option value="">Selecione um carro</option>
+            <option th:each="car : ${carros}" th:value="${car.id}" th:text="${car.modelo} + ' (' + ${car.marca.nome} + ') - R$ ' + ${car.valor}"></option>
+        </select>
+        <span th:if="${#fields.hasErrors('carro')}" th:errors="*{carro}" class="error"></span>
+        <br><br>
+
+        <label>Quantidade de Parcelas (1 = À vista com 5% OFF):</label><br>
+        <input type="number" min="1" max="60" th:field="*{parcelas}" />
+        <span th:if="${#fields.hasErrors('parcelas')}" th:errors="*{parcelas}" class="error"></span>
+        <br><br>
+
+        <input type="submit" value="Calcular e Finalizar Venda" />
+        <a href="/vendas">Cancelar</a>
+    </form>
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Locações - Locadora de Veículos</title>
+    <link rel="stylesheet" href="/css/estilo.css">
+</head>
+<body>
+    <div class="menu">
+        <a href="/">Início</a>
+        <a href="/marcas">Marcas</a>
+        <a href="/carros">Carros</a>
+        <a href="/clientes">Clientes</a>
+        <a href="/locacoes">Locações</a>
+    </div>
+
+    <div class="conteudo">
+        <h1>Locações Realizadas</h1>
+        <br>
+        <a href="/locacoes/novo">Registrar Nova Locação</a>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Código</th>
+                    <th>Cliente</th>
+                    <th>Carro</th>
+                    <th>Retirada</th>
+                    <th>Devolução</th>
+                    <th>Dias</th>
+                    <th>Regra Aplicada</th>
+                    <th>Valor Total</th>
+                    <th>Situação</th>
+                    <th>Ação</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="l : ${locacoes}">
+                    <td th:text="${l.codigoContrato}"></td>
+                    <td th:text="${l.cliente.nome}"></td>
+                    <td th:text="${l.carro.modelo} + ' (' + ${l.carro.marca.nome} + ')'"></td>
+                    <td th:text="${l.dataRetirada}"></td>
+                    <td th:text="${l.dataDevolucao}"></td>
+                    <td th:text="${l.diasLocacao}"></td>
+                    <td th:text="${l.planoAplicado}"></td>
+                    <td th:text="'R$ ' + ${l.valorTotal}"></td>
+                    <td>
+                        <span class="badge" th:text="${l.ativa} ? 'Em Andamento' : 'Devolvido'"></span>
+                    </td>
+                    <td>
+                        <a th:if="${l.ativa}" th:href="@{/locacoes/devolver/{id}(id=${l.id})}">Devolver Carro</a>
+                        <span th:unless="${l.ativa}">Concluída</span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Carros - Locadora de Veículos</title>
+    <link rel="stylesheet" href="/css/estilo.css">
+</head>
+<body>
+    <div class="menu">
+        <a href="/">Início</a>
+        <a href="/marcas">Marcas</a>
+        <a href="/carros">Carros</a>
+        <a href="/clientes">Clientes</a>
+        <a href="/locacoes">Locações</a>
+    </div>
+
+    <div class="conteudo">
+        <h1>Carros Cadastrados</h1>
+        <br>
+        <a href="/carros/novo">Adicionar Novo Carro</a>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Modelo</th>
+                    <th>Marca</th>
+                    <th>Categoria</th>
+                    <th>Diária</th>
+                    <th>Seguro (10%)</th>
+                    <th>Situação</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="carro : ${carros}">
+                    <td th:text="${carro.id}"></td>
+                    <td th:text="${carro.modelo}"></td>
+                    <td th:text="${carro.marca.nome}"></td>
+                    <td th:text="${carro.categoriaAutomatica}"></td>
+                    <td th:text="'R$ ' + ${carro.valor}"></td>
+                    <td th:text="'R$ ' + ${carro.seguroDiario}"></td>
+                    <td>
+                        <span class="badge" th:text="${carro.disponivel} ? 'Disponível' : 'Alugado'"></span>
+                    </td>
+                    <td>
+                        <a th:href="@{/carros/editar/{id}(id=${carro.id})}">Editar</a>
+                        <a th:href="@{/carros/excluir/{id}(id=${carro.id})}"
+                           onclick="return confirm('Tem certeza?')">Excluir</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

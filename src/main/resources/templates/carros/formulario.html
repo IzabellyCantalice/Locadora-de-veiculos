@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${carro.id} == null ? 'Novo Carro' : 'Editar Carro'"></title>
+    <link rel="stylesheet" href="/css/estilo.css">
+</head>
+<body>
+    <h1 th:text="${carro.id} == null ? 'Novo Carro' : 'Editar Carro'"></h1>
+    <form th:action="@{/carros/salvar}" th:object="${carro}" method="post">
+        <input type="hidden" th:field="*{id}" />
+
+        <label for="modelo">Modelo:</label>
+        <input type="text" th:field="*{modelo}" id="modelo" placeholder="Modelo do carro" />
+        <span th:if="${#fields.hasErrors('modelo')}" th:errors="*{modelo}" style="color: red;"></span>
+        <br>
+
+        <label for="valor">Valor:</label>
+        <input type="number" step="0.01" th:field="*{valor}" id="valor" placeholder="Valor do carro" />
+        <span th:if="${#fields.hasErrors('valor')}" th:errors="*{valor}" style="color: red;"></span>
+        <br>
+
+        <label for="marca">Marca:</label>
+        <select th:field="*{marca}" id="marca">
+            <option value="">Selecione uma marca</option>
+            <option th:each="m : ${marcas}" th:value="${m.id}" th:text="${m.nome}"></option>
+        </select>
+        <span th:if="${#fields.hasErrors('marca')}" th:errors="*{marca}" style="color: red;"></span>
+        <br><br>
+
+        <input type="submit" value="Salvar" />
+        <a href="/carros">Cancelar</a>
+    </form>
+</body>
+</html>

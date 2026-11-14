@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Marcas</title>
+    <link rel="stylesheet" href="/css/estilo.css">
+</head>
+<body>
+    <h1>Marcas</h1>
+    <a href="/marcas/novo">Adicionar Nova Marca</a>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nome</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="marca : ${marcas}">
+                <td th:text="${marca.id}"></td>
+                <td th:text="${marca.nome}"></td>
+                <td>
+                    <a th:href="@{/marcas/editar/{id}(id=${marca.id})}">Editar</a>
+                    <a th:href="@{/marcas/excluir/{id}(id=${marca.id})}"
+                       onclick="return confirm('Tem certeza?')">Excluir</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <br>
+    <a href="/carros">Gerenciar Carros</a>
+</body>
+</html>
